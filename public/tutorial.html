@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cómo Hacer un Buen Café</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <div class="side-menu" id="side-menu">
+  <button id="close-menu" aria-label="Cerrar menú">✖</button>
+<ul class="side-menu-items">
+    <li><a href="./index.html">Inicio</a></li>
+    <li><a href="./tutorial.html">Tutorial</a></li>
+    <li><a href="./menu.html">Nuestro menú</a></li>
+    <li><a href="./trabaja-con-nosotros.html">Trabajá con nosotros</a></li>
+    <li><a href="./franquicias.html">Franquicias</a></li>
+    <li><a href="./contacto.html">Contacto</a></li>
+    <li><a href="./login.html" class="login-link">Iniciar Sesión</a></li>
+  </ul>
+</div>
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="site-logo">
+        <img src="https://tiendadecafe.com.ar/wp-content/uploads/2021/02/tienda-de-cafe.png" alt="Tienda de Café" />
+      </div>
+       <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+  ☰
+</button>
+      <nav class="main-nav">
+        <ul class="menu">
+          <li><a href="./index.html">Nuestro café</a></li>
+          <li><a href="./tutorial.html">Tutorial</a></li>
+          <li><a href="./menu.html">Nuestro menú</a></li>
+          <li><a href="./contacto.html">Trabajá con nosotros</a></li>
+          <li><a href="./franquicias.html">Franquicias</a></li>
+          <li><a href="./contacto.html">Contacto</a></li>
+         <li id="user-menu" style="display: none;">
+  <span id="user-name" class="user-greeting"></span>
+  <button id="logout-btn" class="logout-button">Cerrar Sesión</button>
+</li>
+<li id="login-menu">
+  <a href="./login.html" class="login-link">Iniciar Sesión</a>
+</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="tutorial-section">
+    <div class="tutorial-content">
+      <h1>Cómo Hacer un Buen Café</h1>
+      <p>¿Quieres aprender a hacer un café delicioso? Sigue estos pasos y prepárate para disfrutar de una taza de café perfecta.</p>
+
+      <h2>Pasos para Preparar un Café Perfecto:</h2>
+      <ol class="tutorial-steps-list">
+        <li>
+          <strong>Elige buen café:</strong> Asegúrate de usar granos frescos de buena calidad.
+          <img src="./images/cafe_fresco.avif" alt="Granos de café" class="tutorial-img" />
+        </li>
+        <li>
+          <strong>Muele el café:</strong> Muele el café justo antes de prepararlo para preservar su frescura.
+          <img src="./images/cafe_molido.jpg" alt="Molino de café" class="tutorial-img" />
+        </li>
+        <li>
+          <strong>Usa agua filtrada:</strong> El agua de mala calidad puede afectar el sabor del café.
+          <img src="./images/agua_filtrada.jpg" alt="Agua filtrada" class="tutorial-img" />
+        </li>
+        <li>
+          <strong>Temperatura ideal:</strong> Calienta el agua a unos 90-96°C para una extracción perfecta.
+          <img src="./images/cafe_temperatura.png" alt="Termómetro para agua de café" class="tutorial-img" />
+        </li>
+        <li>
+          <strong>Tiempo de extracción:</strong> Ajusta el tiempo según el método (por ejemplo, 5 minutos para cafetera de goteo).
+          <img src="./images/cafe_extracción.webp" alt="Café en proceso de extracción" class="tutorial-img" />
+        </li>
+        <li>
+          <strong>Disfruta:</strong> Sirve tu café y disfruta de su sabor intenso y único.
+          <img src="./images/cafe-mesa.avif" alt="Taza de café servido" class="tutorial-img" />
+        </li>
+      </ol>
+    </div>
+  </section>
+  <footer class="footer-modern">
+    <div class="footer-content">
+      <div class="footer-column logo">
+        <img src="https://tiendadecafe.com.ar/wp-content/uploads/2021/02/tienda-de-cafe.png" alt="Tienda de Café">
+      </div>
+
+      <div class="footer-column">
+        <h4>Contenidos</h4>
+        <ul>
+          <li><a href="./index.html">Inicio</a></li>
+          <li><a href="./menu.html">Nuestro Café</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Necesitas ayuda?</h4>
+        <ul>
+          <li><a href="./tutorial.html">Tutoriales</a></li>
+          <li><a href="./trabaja.html">Trabaja con nosotros</a></li>
+          <li><a href="./franquicias.html">Franquicias</a></li>
+          <li><a href="./contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>¡Suscribite para recibir descuentos y novedades exclusivas!</h4>
+        <form class="subscribe-form">
+          <input type="text" placeholder="Tu nombre">
+          <input type="email" placeholder="Tu email">
+          <button type="submit">Suscribirme</button>
+        </form>
+        <div class="social-title">Conectate con nosotros</div>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/Tiendadecafe" target="_blank" rel="noopener noreferrer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook">
+          </a>
+          <a href="https://www.instagram.com/tiendadecafear/" target="_blank" rel="noopener noreferrer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="Instagram">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>2025 - Grupo 6</p>
+    </div>
+  </footer>
+
+  <script src="./js/hamburguesaMenu.js"></script>
+  <!-- Barra de progreso -->
+<div id="scroll-bar"></div>
+
+<!-- Botón volver arriba -->
+<button id="scrollTopBtn" title="Volver arriba">↑</button>
+<script>
+  const scrollBar = document.getElementById("scroll-bar");
+  const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  window.onscroll = function () {
+    // Barra de progreso
+    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    let scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    let percent = (scrollTop / scrollHeight) * 100;
+    scrollBar.style.width = percent + "%";
+
+    // Botón de volver arriba
+    if (scrollTop > 300) {
+      scrollTopBtn.style.display = "block";
+    } else {
+      scrollTopBtn.style.display = "none";
+    }
+  };
+
+  scrollTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+</script>
+</body>
+</html>

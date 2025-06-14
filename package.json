@@ -1,0 +1,17 @@
+{
+  "name": "tienda-cafe",
+  "version": "1.0.0",
+  "description": "Sistema de tienda de café con autenticación",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2"
+  }
+}

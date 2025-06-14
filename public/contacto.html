@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto - Tienda de Café</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <div class="side-menu" id="side-menu">
+  <button id="close-menu" aria-label="Cerrar menú">✖</button>
+<ul class="side-menu-items">
+    <li><a href="./index.html">Inicio</a></li>
+    <li><a href="./tutorial.html">Tutorial</a></li>
+    <li><a href="./menu.html">Nuestro menú</a></li>
+    <li><a href="./trabaja-con-nosotros.html">Trabajá con nosotros</a></li>
+    <li><a href="./franquicias.html">Franquicias</a></li>
+    <li><a href="./contacto.html">Contacto</a></li>
+    <li><a href="./login.html" class="login-link">Iniciar Sesión</a></li>
+  </ul>
+</div>
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="site-logo">
+        <img src="https://tiendadecafe.com.ar/wp-content/uploads/2021/02/tienda-de-cafe.png" alt="Tienda de Café" />
+      </div>
+      <nav class="main-nav">
+        <ul class="menu">
+          <li><a href="./">Nuestro café</a></li>
+          <li><a href="./tutorial.html">Tutorial</a></li>
+          <li><a href="./menu.html">Nuestro menú</a></li>
+          <li><a href="./contacto.html">Trabajá con nosotros</a></li>
+          <li><a href="./franquicias.html">Franquicias</a></li>
+          <li><a href="./contacto.html">Contacto</a></li>
+          <li id="user-menu" style="display: none;">
+            <span id="user-name" class="user-greeting"></span>
+            <button id="logout-btn" class="logout-button">Cerrar Sesión</button>
+          </li>
+          <li id="login-menu">
+            <a href="./login.html" class="login-link">Iniciar Sesión</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<section class="contact-section">
+  <h2>Contacto</h2>
+  <p>¿Tienes alguna pregunta o quieres saber más sobre nosotros? Escríbenos y te responderemos a la brevedad.</p>
+
+  <form class="contact-form" id="contactForm">
+    <div class="form-group">
+      <input type="text" id="nombre" placeholder="Nombre" required>
+    </div>
+    <div class="form-group">
+      <input type="email" id="email" placeholder="Correo electrónico" required>
+    </div>
+    <div class="form-group">
+      <textarea id="mensaje" placeholder="Mensaje" required></textarea>
+    </div>
+    <button type="submit" class="submit-button">Enviar</button>
+  </form>
+
+  <div id="respuesta"></div>
+</section>
+
+  <footer class="footer-modern">
+    <div class="footer-content">
+      <div class="footer-column logo">
+        <img src="https://tiendadecafe.com.ar/wp-content/uploads/2021/02/tienda-de-cafe.png" alt="Tienda de Café">
+      </div>
+
+      <div class="footer-column">
+        <h4>Contenidos</h4>
+        <ul>
+          <li><a href="./index.html">Inicio</a></li>
+          <li><a href="./menu.html">Nuestro Café</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Necesitas ayuda?</h4>
+        <ul>
+          <li><a href="./tutorial.html">Tutoriales</a></li>
+          <li><a href="./trabaja.html">Trabaja con nosotros</a></li>
+          <li><a href="./franquicias.html">Franquicias</a></li>
+          <li><a href="./contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>¡Suscribite para recibir descuentos y novedades exclusivas!</h4>
+        <form class="subscribe-form">
+          <input type="text" placeholder="Tu nombre">
+          <input type="email" placeholder="Tu email">
+          <button type="submit">Suscribirme</button>
+        </form>
+        <div class="social-title">Conectate con nosotros</div>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/Tiendadecafe" target="_blank" rel="noopener noreferrer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook">
+          </a>
+          <a href="https://www.instagram.com/tiendadecafear/" target="_blank" rel="noopener noreferrer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="Instagram">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>2025 - Grupo 6</p>
+    </div>
+  </footer>
+
+  <script src="./js/contacto.js"></script>
+  <script src="./js/hamburguesaMenu.js"></script>
+</body>
+</html>

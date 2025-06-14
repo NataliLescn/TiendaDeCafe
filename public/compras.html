@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/styles.css">
+
+  <title>Tienda de Café - Carrito</title>
+</head>
+<body>
+  <div class="side-menu" id="side-menu">
+  <button id="close-menu" aria-label="Cerrar menú">✖</button>
+<ul class="side-menu-items">
+    <li><a href="./index.html">Inicio</a></li>
+    <li><a href="./tutorial.html">Tutorial</a></li>
+    <li><a href="./menu.html">Nuestro menú</a></li>
+    <li><a href="./trabaja-con-nosotros.html">Trabajá con nosotros</a></li>
+    <li><a href="./franquicias.html">Franquicias</a></li>
+    <li><a href="./contacto.html">Contacto</a></li>
+    <li><a href="./login.html" class="login-link">Iniciar Sesión</a></li>
+  </ul>
+</div>
+<header class="navbar">
+    <div class="navbar-container">
+      <div class="site-logo">
+        <img src="https://tiendadecafe.com.ar/wp-content/uploads/2021/02/tienda-de-cafe.png" alt="Tienda de Café" />
+      </div>
+       <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+  ☰
+</button>
+      <nav class="main-nav">
+        <ul class="menu">
+          <li><a href="./">Nuestro café</a></li>
+          <li><a href="./tutorial.html">Tutorial</a></li>
+          <li><a href="./menu.html">Nuestro menú</a></li>
+          <li><a href="./contacto.html">Trabajá con nosotros</a></li>
+          <li><a href="./franquicias.html">Franquicias</a></li>
+          <li><a href="./contacto.html">Contacto</a></li>
+         <li id="user-menu" style="display: none;">
+  <span id="user-name" class="user-greeting"></span>
+  <button id="logout-btn" class="logout-button">Cerrar Sesión</button>
+</li>
+<li id="login-menu">
+  <a href="./login.html" class="login-link">Iniciar Sesión</a>
+</li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Modal de confirmación -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h3>✅ Producto agregado correctamente</h3>
+     <button class="modal-button" onclick="cerrarModal()">Aceptar</button>
+    </div>
+  </div>
+
+  <!-- Modal de pago -->
+  <div class="modal" id="modal-pago">
+    <div class="modal-content">
+      <h3>💳 ¿Cómo deseas abonar tu pedido?</h3>
+      <p>Podés pagar con:</p>
+      <ul style="text-align: left; padding-left: 20px;">
+        <li>✅ Transferencia Bancaria</li>
+        <li>✅ Mercado Pago</li>
+        <li>✅ Efectivo (retiro en tienda)</li>
+      </ul>
+      <p>Una vez confirmado el pago, te llegará un correo con los detalles del pedido. ¡Gracias por elegirnos! ☕</p>
+   <button class="modal-button" onclick="cerrarPago()"><link rel="stylesheet" href="./confirmar-compra.html">Aceptar</button>
+    </div>
+  </div>
+
+  </header>
+
+ <button onclick="logout()" class="logout-button">Cerrar sesión</button>
+
+  <h2>Nuestros Productos</h2>
+<div id="productos" class="pairing-container"></div>
+
+<section class="carrito-container">
+  <h2>Tu Carrito</h2>
+  <ul id="carrito-lista" class="carrito-lista"></ul>
+  <p class="carrito-total">Total: $<span id="total">0.00</span></p>
+</section>
+
+<div style="text-align: center; padding: 20px;">
+  <button class="finalizar-btn" onclick="mostrarPago()">Finalizar compra</button>
+</div>
+
+    <footer class="footer-modern">
+    <div class="footer-content">
+      <div class="footer-column logo">
+        <img src="https://tiendadecafe.com.ar/wp-content/uploads/2021/02/tienda-de-cafe.png" alt="Tienda de Café">
+      </div>
+
+      <div class="footer-column">
+        <h4>Contenidos</h4>
+        <ul>
+          <li><a href="./index.html">Inicio</a></li>
+          <li><a href="./menu.html">Nuestro Café</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Necesitas ayuda?</h4>
+        <ul>
+          <li><a href="./tutorial.html">Tutoriales</a></li>
+          <li><a href="./trabaja.html">Trabaja con nosotros</a></li>
+          <li><a href="./franquicias.html">Franquicias</a></li>
+          <li><a href="./contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>¡Suscribite para recibir descuentos y novedades exclusivas!</h4>
+        <form class="subscribe-form">
+          <input type="text" placeholder="Tu nombre">
+          <input type="email" placeholder="Tu email">
+          <button type="submit">Suscribirme</button>
+        </form>
+        <div class="social-title">Conectate con nosotros</div>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/Tiendadecafe" target="_blank" rel="noopener noreferrer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook">
+          </a>
+          <a href="https://www.instagram.com/tiendadecafear/" target="_blank" rel="noopener noreferrer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="Instagram">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>2025 - Grupo 6</p>
+    </div>
+  </footer>
+
+  <script src="./js/compra.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
+    const loginMenu = document.getElementById('login-menu');
+    const userMenu = document.getElementById('user-menu');
+    const userName = document.getElementById('user-name');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    if (usuario) {
+      userName.textContent = `¡Hola, ${usuario.nombre}!`;
+      userMenu.style.display = 'inline-block';
+      loginMenu.style.display = 'none';
+    } else {
+      userMenu.style.display = 'none';
+      loginMenu.style.display = 'inline-block';
+    }
+
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('usuarioLogueado');
+        window.location.href = 'index.html';
+      });
+    }
+  });
+</script>
+<script src="./js/hamburguesaMenu.js"></script>
+</body>
+</html>

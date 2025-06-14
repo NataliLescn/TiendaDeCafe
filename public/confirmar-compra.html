@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirmar Compra</title>
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbar-container">
+      <div class="site-logo">
+        <img src="https://tiendadecafe.com.ar/wp-content/uploads/2021/02/tienda-de-cafe.png" alt="Tienda de Café" />
+      </div>
+      <nav class="main-nav">
+        <ul class="menu">
+          <li><a href="./">Nuestro café</a></li>
+          <li><a href="./tutorial.html">Tutorial</a></li>
+          <li><a href="./menu.html">Nuestro menú</a></li>
+          <li><a href="./contacto.html">Trabajá con nosotros</a></li>
+          <li><a href="./franquicias.html">Franquicias</a></li>
+          <li><a href="./contacto.html">Contacto</a></li>
+          <li id="user-menu" style="display: none;">
+            <span id="user-name" class="user-greeting"></span>
+            <button id="logout-btn" class="logout-button">Cerrar Sesión</button>
+          </li>
+          <li id="login-menu">
+            <a href="./login.html" class="login-link">Iniciar Sesión</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="checkout-container">
+    <h1>Confirmar compra</h1>
+    <p>Seleccioná tu método de pago:</p>
+
+    <form id="form-pago">
+      <label><input type="radio" name="metodo" value="transferencia" required> Transferencia Bancaria</label><br>
+      <label><input type="radio" name="metodo" value="mercadopago"> Mercado Pago</label><br>
+      <label><input type="radio" name="metodo" value="efectivo"> Efectivo (retiro en tienda)</label>
+
+      <div id="instrucciones" class="hidden">
+        <h3>Datos para Transferencia:</h3>
+        <p><strong>CBU:</strong> 0123456789012345678901</p>
+        <p><strong>Alias:</strong> cafetostado.banco</p>
+        <p><strong>Titular:</strong> Tienda de Café S.A.</p>
+      </div>
+
+      <button type="submit" class="finalizar-btn">Confirmar compra</button>
+    </form>
+  </div>
+
+  <script src="./js/confirmar-compra.js"></script>
+</body>
+</html>

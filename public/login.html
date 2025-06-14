@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/styles.css">
+  
+  <title>Login - Tienda de Café</title>
+</head>
+<body class="login-body">
+  <section class="login-section">
+    <div class="login-container">
+      <div class="login-overlay">
+        <form class="login-form" id="login-form">
+          <div class="logo-container">
+            <img src="https://tiendadecafe.com.ar/wp-content/uploads/2021/02/tienda-de-cafe.png" alt="Tienda de Café" class="login-logo">
+          </div>
+          <h2>Iniciar Sesión</h2>
+          
+          <div class="form-group">
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" name="usuario" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="clave">Contraseña:</label>
+            <input type="password" id="clave" name="clave" required>
+          </div>
+          
+          <button type="submit" class="login-button">Ingresar</button>
+          
+          <div class="login-links">
+            <p>¿No tienes una cuenta? <a href="./registro.html">Regístrate</a></p>
+            <p><a href="./index.html">Volver al inicio</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div class="modal" id="modal">
+    <div class="modal-content" id="modal-content">
+      <h3 id="modal-mensaje">¡Bienvenido!</h3>
+      <button onclick="cerrarModal()" class="modal-button">Aceptar</button>
+    </div>
+  </div>
+
+  <script src="./js/login.js"></script>
+</body>
+</html>
