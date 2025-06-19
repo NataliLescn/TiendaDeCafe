@@ -10,48 +10,72 @@
   </style>
 </head>
 <body>
-    <div class="side-menu" id="side-menu">
-    <button id="close-menu" aria-label="Cerrar menú">✖</button>
-    <ul class="side-menu-items">
-      <li><a href="./index.html">Inicio</a></li>
-      <li><a href="./tutorial.html">Tutorial</a></li>
-      <li><a href="./menu.html">Nuestro menú</a></li>
-      <li><a href="./trabaja-con-nosotros.html">Trabajá con nosotros</a></li>
-      <li><a href="./franquicias.html">Franquicias</a></li>
-      <li><a href="./contacto.html">Contacto</a></li>
-<li id="side-user" style="display: none;"><a href="./perfil.html">Ver perfil</a></li>
-<li id="side-logout" style="display: none;"><a href="#" onclick="logout()">Cerrar sesión</a></li>
-<li id="side-login"><a href="./login.html" class="login-link">Iniciar Sesión</a></li>
-    </ul>
-  </div>
-  
-  <header class="navbar">
-    <div class="navbar-container">
-      <div class="site-logo">
-        <img src="https://tiendadecafe.com.ar/wp-content/uploads/2021/02/tienda-de-cafe.png" alt="Tienda de Café" />
-      </div>
-      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
-        ☰
-      </button>
-      <nav class="main-nav">
-        <ul class="menu">
-          <li><a href="./">Nuestro café</a></li>
-          <li><a href="./tutorial.html">Tutorial</a></li>
-          <li><a href="./menu.html">Nuestro menú</a></li>
-          <li><a href="./contacto.html">Trabajá con nosotros</a></li>
-          <li><a href="./franquicias.html">Franquicias</a></li>
-          <li><a href="./contacto.html">Contacto</a></li>
-  <li id="user-menu" class="user-dropdown" style="display: none; position: relative;">
-  <button id="user-toggle" class="logout-button">👤 <span id="user-name">Usuario</span></button>
-  <ul class="dropdown-menu" id="user-dropdown-menu">
-    <li><a href="./perfil.html">Ver perfil</a></li>
-    <li><a href="#" id="logout-link">Cerrar sesión</a></li>
-  </ul>
-</li>
+<!-- Menú lateral -->
+<div class="side-menu" id="side-menu">
+  <button id="close-menu" aria-label="Cerrar menú">✖</button>
+  <ul class="side-menu-items">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="./tutorial.html">Tutorial</a></li>
+    <li><a href="./menu.html">Nuestro menú</a></li>
+    <li><a href="./trabaja-con-nosotros.html">Trabajá con nosotros</a></li>
+    <li><a href="./locales.html">Locales</a></li>
+    <li><a href="./contacto.html">Contacto</a></li>
+
+    <!-- Usuario logueado -->
+    <li id="side-user-menu" style="display: none;">
+      <div class="side-user-container">
+        <button id="side-user-toggle" class="side-user-button">
+          👤 ¡Hola, <span id="side-user-name">usuario</span>! ⬇
+        </button>
+        <ul id="side-user-dropdown-menu" class="side-user-dropdown">
+          <li><a href="perfil.html">👁 Ver perfil</a></li>
+          <li><a href="#" id="side-logout-btn">🚪 Cerrar sesión</a></li>
         </ul>
-      </nav>
+      </div>
+    </li>
+
+    <!-- No logueado -->
+    <li id="side-login">
+      <a href="login.html" class="side-login-button">Iniciar Sesión</a>
+    </li>
+  </ul>
+</div>
+
+<!-- Encabezado principal -->
+<header class="navbar">
+  <div class="navbar-container">
+    <div class="site-logo">
+      <img src="https://tiendadecafe.com.ar/wp-content/uploads/2021/02/tienda-de-cafe.png" alt="Tienda de Café" />
     </div>
-  </header>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">☰</button>
+    <nav class="main-nav">
+      <ul class="menu">
+        <li><a href="./">Nuestro café</a></li>
+        <li><a href="./tutorial.html">Tutorial</a></li>
+        <li><a href="./menu.html">Nuestro menú</a></li>
+        <li><a href="./contacto.html">Trabajá con nosotros</a></li>
+        <li><a href="./locales.html">Locales</a></li>
+        <li><a href="./contacto.html">Contacto</a></li>
+        <ul class="nav-list">
+          <li id="login-menu"><a href="login.html">Iniciar Sesión</a></li>
+
+          <!-- Usuario logueado -->
+          <li id="user-menu" class="user-dropdown" style="display: none;">
+            <button id="user-toggle" class="logout-button">
+              👤¡Hola, <span id="user-name">Usuario!</span> ⬇
+            </button>
+            <ul class="dropdown-menu" id="user-dropdown-menu" style="display: none;">
+              <li><a href="./perfil.html">Ver perfil</a></li>
+              <li><a href="#" id="logout-link">Cerrar sesión</a></li>
+            </ul>
+          </li>
+        </ul>
+      </ul>
+    </nav>
+  </div>
+</header>
 
 <div class="perfil-container">
     <h2>Mi Perfil</h2>
@@ -81,6 +105,8 @@
   </div>
 
 <script src="./js/perfil.js"></script>
+<script src="./js/logueado.js"></script>
+<script src="./js/hamburguesaMenu.js"></script>
 
 </body>
 </html>

@@ -108,32 +108,21 @@ function initializeUserDropdown() {
 }
 
 // Inicializar menú hamburguesa
-function initializeHamburgerMenu() {
-  const menuToggle = document.getElementById('menu-toggle');
-  const sideMenu = document.getElementById('side-menu');
-  const closeMenu = document.getElementById('close-menu');
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menu-toggle");
+  const sideMenu = document.getElementById("side-menu");
+  const closeMenu = document.getElementById("close-menu");
 
-  // Abrir menú
-  if (menuToggle) {
-    menuToggle.addEventListener('click', function() {
-      sideMenu.classList.add('show');
+  if (menuToggle && sideMenu && closeMenu) {
+    menuToggle.addEventListener("click", () => {
+      sideMenu.classList.add("show");
+    });
+
+    closeMenu.addEventListener("click", () => {
+      sideMenu.classList.remove("show");
     });
   }
-
-  // Cerrar menú
-  if (closeMenu) {
-    closeMenu.addEventListener('click', function() {
-      sideMenu.classList.remove('show');
-    });
-  }
-
-  // Cerrar menú al hacer clic fuera
-  document.addEventListener('click', function(event) {
-    if (sideMenu && !sideMenu.contains(event.target) && !menuToggle.contains(event.target)) {
-      sideMenu.classList.remove('show');
-    }
-  });
-
+});
   // Cerrar menú al hacer clic en un enlace
   const sideMenuLinks = document.querySelectorAll('.side-menu-items a');
   sideMenuLinks.forEach(link => {
@@ -141,7 +130,6 @@ function initializeHamburgerMenu() {
       sideMenu.classList.remove('show');
     });
   });
-}
 
 // Manejar suscripción al newsletter
 document.querySelector('.subscribe-form')?.addEventListener('submit', function(e) {
@@ -155,3 +143,70 @@ document.querySelector('.subscribe-form')?.addEventListener('submit', function(e
     this.reset();
   }
 });
+
+//Locales
+  const localesArgentina = [
+    {
+      ciudad: "Buenos Aires",
+      direccion: "Av. Corrientes 1234, CABA",
+      imagen: "../images/localB.jpg",
+      maps: "https://www.google.com/maps?q=Av.+Corrientes+1234,+CABA"
+    },
+    {
+      ciudad: "Córdoba",
+      direccion: "Gral. Paz 456, Córdoba Capital",
+      imagen: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5",
+      maps: "https://www.google.com/maps?q=Gral.+Paz+456,+Córdoba"
+    },
+    {
+      ciudad: "Rosario",
+      direccion: "Bv. Oroño 789, Rosario",
+      imagen: "../images/localR.jpg",
+      maps: "https://www.google.com/maps?q=Bv.+Oroño+789,+Rosario"
+    },
+    {
+      ciudad: "Mendoza",
+      direccion: "Av. Las Heras 234, Mendoza",
+      imagen: "https://images.unsplash.com/photo-1556740749-887f6717d7e4",
+      maps: "https://www.google.com/maps?q=Av.+Las+Heras+234,+Mendoza"
+    },
+    {
+      ciudad: "Salta",
+      direccion: "Caseros 321, Salta",
+      imagen: "../images/localS.jpg",
+      maps: "https://www.google.com/maps?q=Caseros+321,+Salta"
+    }
+  ];
+
+  function mostrarLocales(locales) {
+    const container = document.getElementById("locales-container");
+    container.innerHTML = "";
+
+    locales.forEach(local => {
+      const item = document.createElement("div");
+      item.className = "pairing-item";
+      item.innerHTML = `
+        <img src="${local.imagen}" alt="Café en ${local.ciudad}">
+        <div class="content">
+          <h3>${local.ciudad}</h3>
+          <p>${local.direccion}</p>
+          <a href="${local.maps}" target="_blank" class="map-link">Ver en Google Maps</a>
+        </div>
+      `;
+      container.appendChild(item);
+    });
+  }
+
+  // Filtro en tiempo real
+  document.getElementById('buscador-locales').addEventListener('input', function() {
+    const filtro = this.value.toLowerCase();
+    const filtrados = localesArgentina.filter(local =>
+      local.ciudad.toLowerCase().includes(filtro) ||
+      local.direccion.toLowerCase().includes(filtro)
+    );
+    mostrarLocales(filtrados);
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    mostrarLocales(localesArgentina);
+  });

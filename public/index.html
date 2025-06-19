@@ -4,152 +4,167 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tienda de Café</title>
-  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./css/styles.css" />
+  <script src="https://kit.fontawesome.com/6a1536210c.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <div class="side-menu" id="side-menu">
-    <button id="close-menu" aria-label="Cerrar menú">✖</button>
-    <ul class="side-menu-items">
-      <li><a href="./tutorial.html">Tutorial</a></li>
-      <li><a href="./menu.html">Nuestro menú</a></li>
-      <li><a href="./trabaja-con-nosotros.html">Trabajá con nosotros</a></li>
-      <li><a href="./franquicias.html">Franquicias</a></li>
-      <li><a href="./contacto.html">Contacto</a></li>
-<li id="side-login" style="display: block;">
-  <a href="./login.html" class="login-link">Iniciar Sesión</a>
-</li>
 
-<li id="side-user-menu" class="side-user-dropdown" style="display: none;">
-  <button id="side-user-toggle" class="logout-button">
-    👤 <span id="side-user-name">Usuario</span> <span id="side-arrow-icon">⬇</span>
-  </button>
-  <ul class="dropdown-menu" id="side-user-dropdown-menu" style="display: none;">
-    <li><a href="./perfil.html">Ver perfil</a></li>
-    <li><a href="#" id="side-logout-btn">Cerrar sesión</a></li>
+<!-- Menú lateral -->
+<div class="side-menu" id="side-menu">
+  <button id="close-menu" aria-label="Cerrar menú">✖</button>
+  <ul class="side-menu-items">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="./tutorial.html">Tutorial</a></li>
+    <li><a href="./menu.html">Nuestro menú</a></li>
+    <li><a href="./trabaja-con-nosotros.html">Trabajá con nosotros</a></li>
+    <li><a href="./locales.html">Locales</a></li>
+    <li><a href="./contacto.html">Contacto</a></li>
+
+    <!-- Usuario logueado -->
+    <li id="side-user-menu" style="display: none;">
+      <div class="side-user-container">
+        <button id="side-user-toggle" class="side-user-button">
+          👤 ¡Hola, <span id="side-user-name">usuario</span>! ⬇
+        </button>
+        <ul id="side-user-dropdown-menu" class="side-user-dropdown">
+          <li><a href="perfil.html">👁 Ver perfil</a></li>
+          <li><a href="#" id="side-logout-btn">🚪 Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </li>
+
+    <!-- No logueado -->
+    <li id="side-login">
+      <a href="login.html" class="side-login-button">Iniciar Sesión</a>
+    </li>
   </ul>
-</li>
-    </ul>
+</div>
+
+<!-- Encabezado principal -->
+<header class="navbar">
+  <div class="navbar-container">
+    <div class="site-logo">
+      <img src="https://tiendadecafe.com.ar/wp-content/uploads/2021/02/tienda-de-cafe.png" alt="Tienda de Café" />
+    </div>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">☰</button>
+    <nav class="main-nav">
+      <ul class="menu">
+        <li><a href="./">Nuestro café</a></li>
+        <li><a href="./tutorial.html">Tutorial</a></li>
+        <li><a href="./menu.html">Nuestro menú</a></li>
+        <li><a href="./contacto.html">Trabajá con nosotros</a></li>
+        <li><a href="./locales.html">Locales</a></li>
+        <li><a href="./contacto.html">Contacto</a></li>
+        <ul class="nav-list">
+          <li id="login-menu"><a href="login.html">Iniciar Sesión</a></li>
+
+          <!-- Usuario logueado -->
+          <li id="user-menu" class="user-dropdown" style="display: none;">
+            <button id="user-toggle" class="logout-button">
+              👤¡Hola, <span id="user-name">Usuario!</span> ⬇
+            </button>
+            <ul class="dropdown-menu" id="user-dropdown-menu" style="display: none;">
+              <li><a href="./perfil.html">Ver perfil</a></li>
+              <li><a href="#" id="logout-link">Cerrar sesión</a></li>
+            </ul>
+          </li>
+        </ul>
+      </ul>
+    </nav>
   </div>
-  
-  <header class="navbar">
-    <div class="navbar-container">
-      <div class="site-logo">
-        <img src="https://tiendadecafe.com.ar/wp-content/uploads/2021/02/tienda-de-cafe.png" alt="Tienda de Café" />
-      </div>
-      <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
-        ☰
-      </button>
-      <nav class="main-nav">
-        <ul class="menu">
-          <li><a href="./">Nuestro café</a></li>
-          <li><a href="./tutorial.html">Tutorial</a></li>
-          <li><a href="./menu.html">Nuestro menú</a></li>
-          <li><a href="./contacto.html">Trabajá con nosotros</a></li>
-  <li id="login-menu"><a href="./login.html">Iniciar sesión</a></li>
+</header>
 
-<li id="user-menu" class="user-dropdown" style="display: none; position: relative;">
-  <button id="user-toggle" class="logout-button">
-    👤 <span id="user-name">Usuario</span> <span id="arrow-icon">⬇</span>
-  </button>
-  <ul class="dropdown-menu" id="user-dropdown-menu" style="display: none;">
-    <li><a href="./perfil.html">Ver perfil</a></li>
-    <li><a href="#" id="logout-link">Cerrar sesión</a></li>
-  </ul>
-</li>
-        </ul>
-      </nav>
+<!-- Contenido principal -->
+<main class="main-content">
+  <section class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 id="welcome-message">Bienvenidos a Tienda de Café</h1>
+      <p>Descubre el auténtico sabor del café de especialidad</p>
+      <a href="./menu.html" class="cta-button">Ver nuestro menú</a>
     </div>
-  </header>
+  </section>
 
-  <main class="main-content">
-    <section class="hero-section">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h1 id="welcome-message">Bienvenidos a Tienda de Café</h1>
-        <p>Descubre el auténtico sabor del café de especialidad</p>
-        <a href="./menu.html" class="cta-button">Ver nuestro menú</a>
-      </div>
-    </section>
-
-    <section class="featured-products">
-      <h2>Nuestros Productos Destacados</h2>
-      <div class="products-grid">
-        <div class="product-card">
-          <img src="https://images.pexels.com/photos/2074122/pexels-photo-2074122.jpeg" alt="Café Espresso">
-          <div class="product-info">
-            <h3>Café Espresso</h3>
-            <p>Nuestro clásico espresso, intenso y aromático</p>
-            <a href="./menu.html" class="product-button">Ver más</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <img src="https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg" alt="Cappuccino">
-          <div class="product-info">
-            <h3>Cappuccino</h3>
-            <p>El balance perfecto entre café y espuma de leche</p>
-            <a href="./menu.html" class="product-button">Ver más</a>
-          </div>
-        </div>
-        <div class="product-card">
-          <img src="https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg" alt="Café Helado">
-          <div class="product-info">
-            <h3>Café Helado</h3>
-            <p>Refrescante y delicioso para los días calurosos</p>
-            <a href="./menu.html" class="product-button">Ver más</a>
-          </div>
+  <section class="featured-products">
+    <h2>Nuestros Productos Destacados</h2>
+    <div class="products-grid">
+      <div class="product-card">
+        <img src="https://images.pexels.com/photos/2074122/pexels-photo-2074122.jpeg" alt="Café Espresso">
+        <div class="product-info">
+          <h3>Café Espresso</h3>
+          <p>Nuestro clásico espresso, intenso y aromático</p>
+          <a href="./menu.html" class="product-button">Ver más</a>
         </div>
       </div>
-    </section>
-  </main>
-
-  <footer class="footer-modern">
-    <div class="footer-content">
-      <div class="footer-column logo">
-        <img src="https://tiendadecafe.com.ar/wp-content/uploads/2021/02/tienda-de-cafe.png" alt="Tienda de Café">
+      <div class="product-card">
+        <img src="https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg" alt="Cappuccino">
+        <div class="product-info">
+          <h3>Cappuccino</h3>
+          <p>El balance perfecto entre café y espuma de leche</p>
+          <a href="./menu.html" class="product-button">Ver más</a>
+        </div>
       </div>
-
-      <div class="footer-column">
-        <h4>Contenidos</h4>
-        <ul>
-          <li><a href="./index.html">Inicio</a></li>
-          <li><a href="./menu.html">Nuestro Café</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h4>Necesitas ayuda?</h4>
-        <ul>
-          <li><a href="./tutorial.html">Tutoriales</a></li>
-          <li><a href="./trabaja.html">Trabaja con nosotros</a></li>
-          <li><a href="./franquicias.html">Franquicias</a></li>
-          <li><a href="./contacto.html">Contacto</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h4>¡Suscribite para recibir descuentos y novedades exclusivas!</h4>
-        <form class="subscribe-form">
-          <input type="text" placeholder="Tu nombre">
-          <input type="email" placeholder="Tu email">
-          <button type="submit">Suscribirme</button>
-        </form>
-        <div class="social-title">Conectate con nosotros</div>
-        <div class="social-icons">
-          <a href="https://www.facebook.com/Tiendadecafe" target="_blank" rel="noopener noreferrer">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook">
-          </a>
-          <a href="https://www.instagram.com/tiendadecafear/" target="_blank" rel="noopener noreferrer">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="Instagram">
-          </a>
+      <div class="product-card">
+        <img src="https://images.pexels.com/photos/1695052/pexels-photo-1695052.jpeg" alt="Café Helado">
+        <div class="product-info">
+          <h3>Café Helado</h3>
+          <p>Refrescante y delicioso para los días calurosos</p>
+          <a href="./menu.html" class="product-button">Ver más</a>
         </div>
       </div>
     </div>
+  </section>
+</main>
 
-    <div class="footer-bottom">
-      <p>2025 - Grupo 6</p>
+<!-- Footer -->
+<footer class="footer-modern">
+  <div class="footer-content">
+    <div class="footer-column logo">
+      <img src="https://tiendadecafe.com.ar/wp-content/uploads/2021/02/tienda-de-cafe.png" alt="Tienda de Café">
     </div>
-  </footer>
+    <div class="footer-column">
+      <h4>Contenidos</h4>
+      <ul>
+        <li><a href="./index.html">Inicio</a></li>
+        <li><a href="./menu.html">Nuestro Café</a></li>
+        <li><a href="./locales.html">Nuestros locales</a></li>
+      </ul>
+    </div>
+    <div class="footer-column">
+      <h4>¿Necesitás ayuda?</h4>
+      <ul>
+        <li><a href="./tutorial.html">Tutoriales</a></li>
+        <li><a href="./trabaja.html">Trabajá con nosotros</a></li>
+        <li><a href="./franquicias.html">Franquicias</a></li>
+        <li><a href="./contacto.html">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-column">
+      <h4>¡Suscribite para recibir descuentos y novedades!</h4>
+      <form class="subscribe-form">
+        <input type="text" placeholder="Tu nombre">
+        <input type="email" placeholder="Tu email">
+        <button type="submit">Suscribirme</button>
+      </form>
+      <div class="social-title">Conectate con nosotros</div>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/Tiendadecafe" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/2021_Facebook_icon.svg/2048px-2021_Facebook_icon.svg.png" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/tiendadecafear/" target="_blank">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/2048px-Instagram_icon.png" alt="Instagram">
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>2025 - Grupo 6</p>
+  </div>
+</footer>
 
+<!-- Scripts -->
 <script src="./js/main.js"></script>
 <script src="./js/hamburguesaMenu.js"></script>
 <script src="./js/logueado.js"></script>

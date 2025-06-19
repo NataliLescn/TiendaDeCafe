@@ -1,121 +1,120 @@
 import express from 'express';
 import session from 'express-session';
-import bcrypt from 'bcryptjs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import cors from 'cors';
+import db from './db.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const app = express();
 const PORT = 3000;
 
-const usuarios = [];
-
-async function initUsuarios() {
-  usuarios.push({
-    id: 1,
-    usuario: 'admin',
-    nombre: 'Administrador',
-    email: 'admin@tiendacafe.com',
-    clave: await bcrypt.hash('1234', 10)
-  });
-  usuarios.push({
-    id: 2,
-    usuario: 'juan',
-    nombre: 'Juan Pérez',
-    email: 'juan@email.com',
-    clave: await bcrypt.hash('123456', 10)
-  });
-}
-
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret: 'tienda-cafe-secret-key',
+  secret: 'clave-secreta-cafe',
   resave: false,
   saveUninitialized: false,
-  cookie: {
-    secure: false,
-    maxAge: 24 * 60 * 60 * 1000
-  }
+  cookie: { secure: false, maxAge: 86400000 }
 }));
 
-// Login
-app.post('/api/login', async (req, res) => {
-  const { usuario, clave } = req.body;
-
-  try {
-    const user = usuarios.find(u => u.usuario === usuario);
-
-    if (!user) {
-      return res.status(401).json({ success: false, message: 'Usuario no encontrado' });
-    }
-
-    const claveValida = await bcrypt.compare(clave, user.clave);
-
-    if (!claveValida) {
-      return res.status(401).json({ success: false, message: 'Contraseña incorrecta' });
-    }
-
-    req.session.usuario = {
-      id: user.id,
-      usuario: user.usuario,
-      nombre: user.nombre,
-      email: user.email
-    };
-
-    res.json({
-      success: true,
-      message: 'Login exitoso',
-      usuario: { nombre: user.nombre, usuario: user.usuario }
-    });
-
-  } catch (error) {
-    console.error('Error en login:', error);
-    res.status(500).json({ success: false, message: 'Error interno del servidor' });
-  }
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Registro
 app.post('/api/registro', async (req, res) => {
   const { nombre, email, usuario, clave } = req.body;
 
-  try {
-    const existe = usuarios.find(u => u.usuario === usuario || u.email === email);
+  if (!nombre || !email || !usuario || !clave) {
+    return res.status(400).json({ success: false, message: 'Faltan campos obligatorios' });
+  }
 
-    if (existe) {
-      return res.status(400).json({ success: false, message: 'El usuario o email ya existe' });
+  try {
+    const [existe] = await db.execute(
+      'SELECT 1 FROM usuarios WHERE nombre_usuario = ? OR email = ?',
+      [usuario, email]
+    );
+    if (existe.length) {
+      return res.status(400).json({ success: false, message: 'Usuario o email ya existe' });
     }
 
-    const nuevo = {
-      id: usuarios.length + 1,
-      usuario,
-      nombre,
-      email,
-      clave: await bcrypt.hash(clave, 10)
-    };
+    // 👇 AQUÍ insertamos el nuevo usuario
+    await db.execute(
+      'INSERT INTO usuarios (nombre, email, nombre_usuario, contraseña, rol) VALUES (?, ?, ?, ?, ?)',
+      [nombre, email, usuario, clave, 'cliente']
+    );
 
-    usuarios.push(nuevo);
-
-    res.json({ success: true, message: 'Usuario registrado exitosamente' });
-
-  } catch (error) {
-    console.error('Error en registro:', error);
-    res.status(500).json({ success: false, message: 'Error interno del servidor' });
+    res.json({ success: true, message: 'Usuario registrado correctamente' });
+  } catch (e) {
+    console.error('Error en registro:', e);
+    res.status(500).json({ success: false, message: 'Error al registrar' });
   }
 });
 
-// Resto de rutas...
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// Login
+app.post('/api/login', async (req, res) => {
+  const { usuario, clave } = req.body;
+
+  if (!usuario || !clave) {
+    return res.status(400).json({ success: false, message: 'Usuario y contraseña requeridos' });
+  }
+
+  try {
+    const [rows] = await db.execute(
+      'SELECT * FROM usuarios WHERE nombre_usuario = ? LIMIT 1',
+      [usuario]
+    );
+
+    if (rows.length === 0) {
+      return res.status(401).json({ success: false, message: 'Usuario no encontrado' });
+    }
+
+    const user = rows[0];
+
+    if (clave !== user.contraseña) {
+      return res.status(401).json({ success: false, message: 'Contraseña incorrecta' });
+    }
+
+    req.session.usuario = {
+      id: user.id_usuario,
+      nombre: user.nombre,
+      usuario: user.nombre_usuario,
+      email: user.email,
+      rol: user.rol
+    };
+
+    res.json({ success: true, usuario: req.session.usuario });
+
+  } catch (e) {
+    console.error('Error en login:', e);
+    res.status(500).json({ success: false, message: 'Error al iniciar sesión' });
+  }
 });
 
-initUsuarios().then(() => {
-  app.listen(PORT, () => {
-    console.log(`✅ Servidor corriendo en http://localhost:${PORT}`);
+// Ver sesión activa
+app.get('/api/usuario-logueado', (req, res) => {
+  if (req.session.usuario) {
+    res.json({ success: true, usuario: req.session.usuario });
+  } else {
+    res.json({ success: false });
+  }
+});
+
+// Logout
+app.post('/api/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.json({ success: true });
   });
 });
 
+app.listen(PORT, () => {
+  console.log(`**Servidor corriendo en http://localhost:${PORT}`);
+});

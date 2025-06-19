@@ -70,7 +70,7 @@ function cerrarModal() {
 
 function mostrarPago() {
   if (carrito.length === 0) {
-    alert("🛒 Tu carrito está vacío.");
+    alert("Tu carrito está vacío.");
   } else {
     document.getElementById('modal-pago').style.display = 'flex';
   }
@@ -81,6 +81,7 @@ function cerrarPago() {
   carrito = [];
   actualizarCarrito();
   window.location.href = "confirmar-compra.html";
+  localStorage.removeItem("usuario");
 }
 
 function logout() {

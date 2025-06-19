@@ -1,120 +1,188 @@
-// Manejar formulario de login
-document.getElementById('login-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  const formData = new FormData(e.target);
-  const datos = Object.fromEntries(formData);
-  
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('login-form');
   const modal = document.getElementById('modal');
-  const mensaje = document.getElementById('modal-mensaje');
-  
-  try {
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(datos)
+  const modalMensaje = document.getElementById('modal-mensaje');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const datos = {
+      usuario: formData.get('usuario'),
+      clave: formData.get('clave')
+    };
+
+    // Validación básica
+    if (!datos.usuario || !datos.clave) {
+      mostrarError('Todos los campos son obligatorios');
+      return;
+    }
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Ingresando...';
+
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datos)
+      });
+
+      const result = await response.json();
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+
+      if (result.success) {
+        modalMensaje.textContent = `¡Bienvenido, ${result.usuario.nombre}!`;
+        mostrarModal();
+
+        // Guardar usuario en localStorage
+        localStorage.setItem('usuarioLogueado', JSON.stringify(result.usuario));
+
+        // Reset form
+        form.reset();
+      } else {
+        mostrarError(result.message || 'Error en el login');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      mostrarError('Error de conexión. Intenta nuevamente.');
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalText;
+    }
+  });
+
+  function mostrarError(mensaje) {
+    let errorDiv = document.querySelector('.error-message');
+    if (!errorDiv) {
+      errorDiv = document.createElement('div');
+      errorDiv.className = 'error-message';
+      errorDiv.style.cssText = `
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        text-align: center;
+        font-weight: 600;
+      `;
+      form.insertBefore(errorDiv, form.firstChild);
+    }
+    errorDiv.textContent = mensaje;
+    errorDiv.style.display = 'block';
+    setTimeout(() => {
+      errorDiv.style.display = 'none';
+    }, 5000);
+  }
+
+function mostrarModal() {
+  modal.style.display = 'flex';
+}
+
+  window.cerrarModal = function () {
+    modal.style.display = 'none';
+    setTimeout(() => {
+      window.location.href = './index.html';
+    }, 500);
+  };
+
+  window.addEventListener('click', function (event) {
+    if (event.target === modal) {
+      cerrarModal();
+    }
+  });
+
+  // Validación en tiempo real
+  const inputs = form.querySelectorAll('input');
+  inputs.forEach(input => {
+    input.addEventListener('input', function () {
+      this.style.borderColor = '#ddd';
+      const errorMsg = document.querySelector('.error-message');
+      if (errorMsg) {
+        errorMsg.style.display = 'none';
+      }
     });
-    
-    const result = await response.json();
-    
- if (result.success) {
 
-  localStorage.setItem('usuarioLogueado', JSON.stringify(result.usuario));
+    input.addEventListener('blur', function () {
+      validarCampo(this);
+    });
+  });
 
-  mensaje.textContent = `¡Bienvenido ${result.usuario.nombre}! Serás redirigido a la página principal.`;
-  mensaje.style.color = '#155724';
+  function validarCampo(input) {
+    const valor = input.value.trim();
+    switch (input.name) {
+      case 'usuario':
+        if (valor.length < 3) {
+          marcarError(input, 'El usuario debe tener al menos 3 caracteres');
+        } else {
+          marcarExito(input);
+        }
+        break;
+      case 'clave':
+        if (valor.length < 4) {
+          marcarError(input, 'La contraseña debe tener al menos 4 caracteres');
+        } else {
+          marcarExito(input);
+        }
+        break;
+    }
+  }
 
-  setTimeout(() => {
-    const destino = localStorage.getItem('redireccionPendiente') || 'index.html';
-    localStorage.removeItem('redireccionPendiente');
-    window.location.href = destino;
-  }, 1500);
-}
-    
-    modal.style.display = 'flex';
-    
-  } catch (error) {
-    console.error('Error en login:', error);
-    mensaje.textContent = 'Error de conexión. Intenta nuevamente.';
-    mensaje.style.color = '#721c24';
-    modal.style.display = 'flex';
+  function marcarError(input, mensaje) {
+    input.style.borderColor = '#dc3545';
+    let errorMsg = input.parentNode.querySelector('.field-error');
+    if (!errorMsg) {
+      errorMsg = document.createElement('small');
+      errorMsg.className = 'field-error';
+      errorMsg.style.color = '#dc3545';
+      errorMsg.style.fontSize = '0.8rem';
+      errorMsg.style.marginTop = '0.25rem';
+      errorMsg.style.display = 'block';
+      input.parentNode.appendChild(errorMsg);
+    }
+    errorMsg.textContent = mensaje;
+  }
+
+  function marcarExito(input) {
+    input.style.borderColor = '#28a745';
+    const errorMsg = input.parentNode.querySelector('.field-error');
+    if (errorMsg) {
+      errorMsg.remove();
+    }
+  }
+
+  // Verificar si ya hay un usuario logueado
+  const usuarioGuardado = localStorage.getItem('usuarioLogueado');
+  if (usuarioGuardado) {
+    const usuario = JSON.parse(usuarioGuardado);
+    console.log('Ya hay sesión iniciada:', usuario);
   }
 });
 
-function logout() {
-  localStorage.removeItem('usuarioLogueado');
-  window.location.href = 'index.html';
-}
-
-function cerrarModal() {
-  const modal = document.getElementById('modal');
-  modal.style.display = 'none';
-}
-
-// Cerrar modal al hacer clic fuera de él
-window.addEventListener('click', function(event) {
-  const modal = document.getElementById('modal');
-  if (event.target === modal) {
-    cerrarModal();
-  }
-});
-
-const usuario = JSON.parse(localStorage.getItem('usuarioLogueado'));
-
-const loginMenu = document.getElementById('login-menu');
-const userMenu = document.getElementById('user-menu');
-const userName = document.getElementById('user-name');
-const logoutBtn = document.getElementById('logout-btn');
-
-const sideUserMenu = document.getElementById('side-user-menu');
-const sideUserName = document.getElementById('side-user-name');
-const sideLogoutBtn = document.getElementById('side-logout-btn');
-
-if (usuario) {
-  userName.textContent = `¡Hola, ${usuario.nombre}!`;
-  sideUserName.textContent = `¡Hola, ${usuario.nombre}!`;
-
-  userMenu.style.display = 'inline-block';
-  loginMenu.style.display = 'none';
-
-  sideUserMenu.style.display = 'block';
-} else {
-  userMenu.style.display = 'none';
-  loginMenu.style.display = 'inline-block';
-
-  sideUserMenu.style.display = 'none';
-}
-
-logoutBtn?.addEventListener('click', cerrarSesion);
-sideLogoutBtn?.addEventListener('click', cerrarSesion);
-
-function cerrarSesion() {
-  localStorage.removeItem('usuarioLogueado');
-  window.location.href = 'index.html';
-}
-
-// Toggle para dropdown del usuario
+// Dropdown menú de usuario
 const userToggle = document.getElementById('user-toggle');
 const userDropdownMenu = document.getElementById('user-dropdown-menu');
 
 if (userToggle) {
   userToggle.addEventListener('click', (e) => {
-    e.stopPropagation(); // Evita que se cierre inmediatamente
+    e.stopPropagation();
     userDropdownMenu.style.display = userDropdownMenu.style.display === 'block' ? 'none' : 'block';
   });
 
-  // Cerrar el menú al hacer clic fuera
   document.addEventListener('click', () => {
     userDropdownMenu.style.display = 'none';
   });
 }
 
-// Logout desde dropdown
+// Logout
 const logoutLink = document.getElementById('logout-link');
 if (logoutLink) {
-  logoutLink.addEventListener('click', () => {
+  logoutLink.addEventListener('click', async () => {
+    await fetch('/api/logout', { method: 'POST' });
     localStorage.removeItem('usuarioLogueado');
     window.location.href = 'index.html';
   });
